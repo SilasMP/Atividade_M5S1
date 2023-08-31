@@ -1,0 +1,107 @@
+{%load static%}
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>Atividade M5S1 - Portal de Noticias</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/blog/">
+  <!-- Bootstrap core CSS -->
+  <link href="{%static 'bootstrap.min.css'%}" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  <!-- Custom styles for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{%static 'style.css'%}" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header class="blog-header py-3">
+      <div class="row flex-nowrap justify-content-between align-items-center">
+        <div class="col-4 pt-1">
+          <a class="link-secondary" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M0 13C0 6.373 5.373 1 12 1s12 5.373 12 12v8.657a.75.75 0 0 1-1.5 0V13c0-5.799-4.701-10.5-10.5-10.5S1.5 7.201 1.5 13v8.657a.75.75 0 0 1-1.5 0V13Z"></path><path d="M8 19.75a.75.75 0 0 1 .75-.75h6.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1-.75-.75ZM5.25 9.5h13.5c.966 0 1.75.784 1.75 1.75v3.5a1.75 1.75 0 0 1-1.75 1.75H5.25a1.75 1.75 0 0 1-1.75-1.75v-3.5c0-.966.784-1.75 1.75-1.75Zm.22 1.47a.75.75 0 0 0 0 1.06l3 3a.75.75 0 0 0 1.06 0L12 12.56l2.47 2.47a.75.75 0 0 0 1.06 0l3-3a.749.749 0 0 0-.326-1.275.749.749 0 0 0-.734.215L15 13.44l-2.47-2.47a.75.75 0 0 0-1.06 0L9 13.44l-2.47-2.47a.75.75 0 0 0-1.06 0Z"></path></svg>
+          </a>
+        </div>
+        <div class="col-4 text-center">
+          <a class="blog-header-logo text-dark" href="#" style="text-decoration: none;">Portal de Noticias</a>
+        </div>
+        <div class="col-4 d-flex justify-content-end align-items-center">
+          <a class="link-secondary" href="#" aria-label="Search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+              stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img"
+              viewBox="0 0 24 24">
+              <title>Search</title>
+              <circle cx="10.5" cy="10.5" r="7.5" />
+              <path d="M21 21l-5.2-5.2" />
+            </svg>
+          </a>
+          <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="nav-scroller py-1 mb-2">
+      <nav class="nav d-flex justify-content-between">
+        <a class="p-2 link-secondary" href="#" style="text-decoration: none;">Politica</a>
+        <a class="p-2 link-secondary" href="#" style="text-decoration: none;">Futebol</a>
+        <a class="p-2 link-secondary" href="#" style="text-decoration: none;">Tecnologia</a>
+        <a class="p-2 link-secondary" href="#" style="text-decoration: none;">Curiosidades</a>
+        <a class="p-2 link-secondary" href="#" style="text-decoration: none;">Economia</a>
+        <a class="p-2 link-secondary" href="#" style="text-decoration: none;">Saúde</a>
+        <a class="p-2 link-secondary" href="{% url 'contato' %}" style="text-decoration: none;">CONTATO</a>
+      </nav>
+    </div>
+  </div>
+
+  <main class="container">
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+      <div class="row mb-2">
+        <div class="col-md-6 px-0">
+          <h1 class="display-4 fst-italic">Noticias do Dia</h1>
+          <p class="lead my-2">Fique informado com as principais noticias do seu dia-a-dia por aqui.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-2">
+      {%for noticia in noticias%}
+        <div class="col-md-6">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary">{{noticia.categoria}}</strong>
+              <h3 class="mb-0">{{noticia.titulo}}</h3>
+              <div class="mb-1 text-muted">{{noticia.data}}</div>
+              <p class="card-text mb-auto">{{noticia.descricao}}</p>
+              <a href="#" class="stretched-link" title={{noticia.titulo}} aria-disabled="true" data-bs-toggle="modal" data-bs-target="#loginModal">Continue lendo...</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </main>
+  <footer class="blog-footer">
+    <p>Atividade de Django para o curso de Desenvolvedor em Python Completo da <a href="https://promo.ultima.school/python/">Ultima School</a>
+    <p>
+      <a href="#">Back to top</a>
+    </p>
+  </footer>
+</body>
+</html>
